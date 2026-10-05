@@ -1,3 +1,4 @@
+import { WS_BASE_URL } from '@/lib/config';
 // WebSocket connection manager for Alpaca real-time data streaming
 
 export type AlpacaDataType = 'crypto' | 'stocks' | 'options' | 'etfs';
@@ -74,7 +75,7 @@ class AlpacaWebSocketManager {
   private isConnecting: boolean = false;
   private connectionPromise: Promise<void> | null = null;
 
-  constructor(baseUrl: string = 'ws://localhost:8000', dataType: AlpacaDataType = 'stocks') {
+  constructor(baseUrl: string = WS_BASE_URL, dataType: AlpacaDataType = 'stocks') {
     this.baseUrl = baseUrl;
     this.dataType = dataType;
   }
@@ -312,9 +313,9 @@ class AlpacaWebSocketManager {
 }
 
 // Create singleton instances for each data type
-export const cryptoWebSocket = new AlpacaWebSocketManager('ws://localhost:8000', 'crypto');
-export const stocksWebSocket = new AlpacaWebSocketManager('ws://localhost:8000', 'stocks');
-export const optionsWebSocket = new AlpacaWebSocketManager('ws://localhost:8000', 'options');
-export const etfsWebSocket = new AlpacaWebSocketManager('ws://localhost:8000', 'etfs');
+export const cryptoWebSocket = new AlpacaWebSocketManager(WS_BASE_URL, 'crypto');
+export const stocksWebSocket = new AlpacaWebSocketManager(WS_BASE_URL, 'stocks');
+export const optionsWebSocket = new AlpacaWebSocketManager(WS_BASE_URL, 'options');
+export const etfsWebSocket = new AlpacaWebSocketManager(WS_BASE_URL, 'etfs');
 
 export default AlpacaWebSocketManager;

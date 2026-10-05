@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-const API_BASE = 'http://localhost:8000';
+import { API_BASE_URL as API_BASE } from '@/lib/config';
 
 // ========== TYPES ==========
 

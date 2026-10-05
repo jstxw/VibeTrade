@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Text, Button, Heading } from "@radix-ui/themes";
-import VRMViewerCompact from "./VRMViewerCompact";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -46,25 +45,6 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
     // Button stays in place - no animation
 
     // Camera animation - move backwards
-    const cameraAnimation = gsap.to({}, {
-      duration: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        onUpdate: (self) => {
-          // This will be controlled by the VRMViewerCompact component
-          const progress = self.progress;
-          // Update global camera state
-          if (typeof window !== 'undefined') {
-            (window as any).landingCameraProgress = progress;
-          }
-        }
-      }
-    });
-
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       // Restore original overflow when component unmounts
@@ -131,21 +111,6 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
           </Button>
         </div>
 
-        {/* 3D Model - Landing Page Horse Girl */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          style={{ zIndex: 1 }}
-        >
-          <VRMViewerCompact
-            key="landing-page-vrm"
-            modelPath="/horse_girl.vrm"
-            viewMode="landing"
-          />
-        </motion.div>
-
         {/* Mesh gradient overlay */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-60">
           <div
@@ -169,6 +134,40 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
               filter: 'blur(120px)',
             }}
           />
+        </div>
+      </div>
+
+      {/* System Architecture Section */}
+      <div className="bg-white py-20 px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            className="text-6xl font-bold mb-12 text-center"
+            style={{
+              color: '#831843',
+              fontFamily: 'var(--font-playfair), Georgia, serif',
+              fontStyle: 'italic',
+            }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            System Architecture
+          </motion.h2>
+          <motion.div
+            className="rounded-2xl overflow-hidden shadow-lg border-2"
+            style={{ borderColor: '#fce7f3' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <img
+              src="/architecture.jpg"
+              alt="VibeTrade system architecture diagram"
+              className="w-full h-auto"
+            />
+          </motion.div>
         </div>
       </div>
 

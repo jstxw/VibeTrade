@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { API_BASE_URL } from "@/lib/config";
 import { Text, Flex, DropdownMenu, Button, ChevronDownIcon, Badge } from "@radix-ui/themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChartIcon, DashboardIcon, ActivityLogIcon, ExclamationTriangleIcon, GearIcon, SpeakerLoudIcon, SpeakerOffIcon, PersonIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
@@ -118,7 +119,7 @@ export default function Home() {
   useEffect(() => {
     const triggerScenario = async (scenario: "crash" | "moon") => {
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/debug/scenario/${scenario}`, { method: "POST" });
+        await fetch(`${API_BASE_URL}/debug/scenario/${scenario}`, { method: "POST" });
       } catch (err) {
         console.error("Failed to trigger debug scenario:", err);
       }
@@ -135,7 +136,7 @@ export default function Home() {
       } else if (e.key === "=") {
         triggerScenario("moon");
       } else if (e.key === "\\") {
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/debug/scenario/clear`, { method: "POST" }).catch(console.error);
+        fetch(`${API_BASE_URL}/debug/scenario/clear`, { method: "POST" }).catch(console.error);
       }
     };
 
