@@ -1,6 +1,16 @@
 # VibeTrade — Cursor for Day Traders
 
+<p align="center">
+  <img src="frontend/public/logo.png" alt="VibeTrade logo" width="160" />
+</p>
+
 VibeTrade is a real-time BTC trading terminal powered by an agentic LLM, live market data, and a voice-first interaction pipeline. It ingests multiple data streams, computes a risk score every second, and uses a LangGraph agent to inspect market conditions, analyze sentiment, and execute paper trades through Alpaca. 
+
+## Screenshots
+
+![Crypto portfolio dashboard with AI-assisted trading panel](frontend/public/photo1.png)
+
+![Live price chart with TradingView candles](frontend/public/photo2.png)
 
 ## What it does
 
@@ -22,6 +32,10 @@ agent decisions → frontend,
 orders → portfolio panel.
 
 
+
+## System Architecture
+
+![VibeTrade system architecture: external sources, Kafka event bus, storage, FastAPI backend and Next.js frontend, AI agent activation, and the agent reasoning and tool loop](frontend/public/architecture.jpg)
 
 ## **How it works**
 
